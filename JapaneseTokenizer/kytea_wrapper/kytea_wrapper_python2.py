@@ -34,7 +34,7 @@ class KyteaWrapper(WrapperBase):
         # type: (Union[str, unicode]) -> unicode
         if isinstance(input_char, str):
             return input_char.decode('utf-8')
-        elif isinstance(input_char, unicode):
+        elif isinstance(input_char, str):
             return input_char
         else:
             raise Exception('nor unicode, str')
@@ -47,7 +47,7 @@ class KyteaWrapper(WrapperBase):
         assert isinstance(is_feature, bool)
 
         surface = self.__check_char_set(kytea_tags_tuple[0])
-        word_stem = u''
+        word_stem = ''
 
         pos_tuple = kytea_tags_tuple[1][0]
         pos = self.__check_char_set(pos_tuple[0][0])

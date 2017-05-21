@@ -24,7 +24,7 @@ def basic_example_mecab_2x():
     # ========================================================
 
     # input is `unicode` type(in python2x)
-    sentence = u'テヘランは、西アジア、イランの首都でありかつテヘラン州の州都。人口12,223,598人。都市圏人口は13,413,348人に達する。'
+    sentence = 'テヘランは、西アジア、イランの首都でありかつテヘラン州の州都。人口12,223,598人。都市圏人口は13,413,348人に達する。'
 
     # make MecabWrapper object
     # you can choose from "neologd", "all", "ipadic", "user", "", None
@@ -47,7 +47,7 @@ def basic_example_mecab_2x():
     # you can filter tokens by stopwords or POS conditions
 
     # stopword is list objetc
-    stopwords = [u'テヘラン']
+    stopwords = ['テヘラン']
     assert isinstance(tokenized_obj, TokenizedSenetence)
     # returned object is "FilteredObject" class
     filtered_obj = mecab_wrapper.filter(
@@ -56,31 +56,31 @@ def basic_example_mecab_2x():
     )
     assert isinstance(filtered_obj, FilteredObject)
     #
-    print('-'*30)
-    print(u'Mecab Demo')
+    print(('-'*30))
+    print('Mecab Demo')
     for token_obj in filtered_obj.tokenized_objects:
         assert isinstance(token_obj, TokenizedResult)
-        print(u'word_stem:{}, word_surafce:{}, pos:{}'.format(
+        print(('word_stem:{}, word_surafce:{}, pos:{}'.format(
             token_obj.word_stem,
             token_obj.word_surface,
-            token_obj.tuple_pos))
+            token_obj.tuple_pos)))
 
     # pos condition is list of tuples
     # You can set POS condition "ChaSen 品詞体系 (IPA品詞体系)" of this page http://www.unixuser.org/~euske/doc/postag/#chasen
-    pos_condition = [(u'名詞', u'固有名詞'), (u'動詞', u'自立')]
+    pos_condition = [('名詞', '固有名詞'), ('動詞', '自立')]
     filtered_obj = mecab_wrapper.filter(
         parsed_sentence=tokenized_obj,
         pos_condition=pos_condition
     )
     assert isinstance(filtered_obj, FilteredObject)
-    print('-'*30)
-    print(u'Mecab Filtering Demo')
+    print(('-'*30))
+    print('Mecab Filtering Demo')
     for token_obj in filtered_obj.tokenized_objects:
         assert isinstance(token_obj, TokenizedResult)
-        print(u'word_stem:{}, word_surafce:{}, pos:{}'.format(
+        print(('word_stem:{}, word_surafce:{}, pos:{}'.format(
             token_obj.word_stem,
             token_obj.word_surface,
-            token_obj.tuple_pos))
+            token_obj.tuple_pos)))
     ### You can write chain expression on init-instance -> tokenize -> filtering -> list  ###
     filtered_result = MecabWrapper(dictType=dictType).tokenize(sentence).filter(pos_condition=pos_condition).convert_list_object()
     assert isinstance(filtered_result, list)
@@ -89,7 +89,7 @@ def basic_example_mecab_2x():
 
 def basic_example_juman_2x():
     # input is `unicode` type(in python2x)
-    sentence = u'テヘランは、西アジア、イランの首都でありかつテヘラン州の州都。人口12,223,598人。都市圏人口は13,413,348人に達する。'
+    sentence = 'テヘランは、西アジア、イランの首都でありかつテヘラン州の州都。人口12,223,598人。都市圏人口は13,413,348人に達する。'
 
     juman_wrapper = JumanWrapper()
     tokenized_objects = juman_wrapper.tokenize(
@@ -97,14 +97,14 @@ def basic_example_juman_2x():
         normalize=True,
         return_list=False)
     assert isinstance(tokenized_objects, TokenizedSenetence)
-    print('-'*30)
-    print(u'Juman Demo')
+    print(('-'*30))
+    print('Juman Demo')
     for token_object in tokenized_objects.tokenized_objects:
         assert isinstance(token_object, TokenizedResult)
-        print(u'word_stem:{}, word_surafce:{}, pos:{}'.format(
+        print(('word_stem:{}, word_surafce:{}, pos:{}'.format(
             token_object.word_stem,
             token_object.word_surface,
-            token_object.tuple_pos))
+            token_object.tuple_pos)))
 
     ### You can call juman with server mode. You must start JUMAN as server mode beforehand ###
     juman_wrapper = JumanWrapper(server='localhost', port=32000)
@@ -113,14 +113,14 @@ def basic_example_juman_2x():
 
 
     # filtering is same as mecab
-    filtered_result = JumanWrapper().tokenize(sentence, return_list=False).filter(pos_condition=[(u'名詞',)]).convert_list_object()
+    filtered_result = JumanWrapper().tokenize(sentence, return_list=False).filter(pos_condition=[('名詞',)]).convert_list_object()
     assert isinstance(filtered_result, list)
     print(filtered_result)
 
 
 def basic_example_jumanpp_2x():
     # input is `unicode` type(in python2x)
-    sentence = u'テヘランは、西アジア、イランの首都でありかつテヘラン州の州都。人口12,223,598人。都市圏人口は13,413,348人に達する。'
+    sentence = 'テヘランは、西アジア、イランの首都でありかつテヘラン州の州都。人口12,223,598人。都市圏人口は13,413,348人に達する。'
 
     jumanpp_wrapper = JumanppWrapper()
     tokenized_objects = jumanpp_wrapper.tokenize(
@@ -129,14 +129,14 @@ def basic_example_jumanpp_2x():
         return_list=False
     )
     assert isinstance(tokenized_objects, TokenizedSenetence)
-    print('-' * 30)
-    print(u'Juman++ Demo')
+    print(('-' * 30))
+    print('Juman++ Demo')
     for token_object in tokenized_objects.tokenized_objects:
         assert isinstance(token_object, TokenizedResult)
-        print(u'word_stem:{}, word_surafce:{}, pos:{}'.format(
+        print(('word_stem:{}, word_surafce:{}, pos:{}'.format(
             token_object.word_stem,
             token_object.word_surface,
-            token_object.tuple_pos))
+            token_object.tuple_pos)))
 
     ### You can call juman with server mode. You must start JUMAN as server mode beforehand ###
     jumanpp_wrapper = JumanppWrapper(server='localhost', port=12000)
@@ -146,13 +146,13 @@ def basic_example_jumanpp_2x():
     del jumanpp_wrapper
 
     # filtering is same as mecab
-    filtered_result = JumanppWrapper(server='localhost', port=12000).tokenize(sentence, return_list=False).filter(pos_condition=[(u'名詞',)]).convert_list_object()
+    filtered_result = JumanppWrapper(server='localhost', port=12000).tokenize(sentence, return_list=False).filter(pos_condition=[('名詞',)]).convert_list_object()
     assert isinstance(filtered_result, list)
 
 
 def basic_example_kytea_2x():
     # input is `unicode` type(in python2x)
-    sentence = u'テヘランは、西アジア、イランの首都でありかつテヘラン州の州都。人口12,223,598人。都市圏人口は13,413,348人に達する。'
+    sentence = 'テヘランは、西アジア、イランの首都でありかつテヘラン州の州都。人口12,223,598人。都市圏人口は13,413,348人に達する。'
 
     kytea_wrapper = KyteaWrapper()
     tokenized_objects = kytea_wrapper.tokenize(
@@ -160,18 +160,18 @@ def basic_example_kytea_2x():
         normalize=True,
         return_list=False)
     assert isinstance(tokenized_objects, TokenizedSenetence)
-    print('-'*30)
-    print(u'Kytea Demo')
+    print(('-'*30))
+    print('Kytea Demo')
     for token_object in tokenized_objects.tokenized_objects:
         assert isinstance(token_object, TokenizedResult)
         # kytea does not show word stem, thus word_stem attribute is always null string
         # instead kytea tells you inferred Yomi, pronounciation
-        print(u'word_surafce:{}, pos:{}, yomi:{}, yomi_score:{}'.format(
+        print(('word_surafce:{}, pos:{}, yomi:{}, yomi_score:{}'.format(
             token_object.word_surface,
             token_object.tuple_pos,
             token_object.misc_info['yomi'],
             token_object.misc_info['yomi_score'],
-        ))
+        )))
 
 def advanced_example_mecab_2x():
     # ========================================================
@@ -188,15 +188,15 @@ def advanced_example_mecab_2x():
         dictType='user',
         pathUserDictCsv=example_user_dict
     )
-    print('-'*30)
-    print(u'Mecab UserDictionary Demo')
-    sentence = u'テヘランは、西アジア、イランの首都でありかつテヘラン州の州都。人口12,223,598人。都市圏人口は13,413,348人に達する。'
+    print(('-'*30))
+    print('Mecab UserDictionary Demo')
+    sentence = 'テヘランは、西アジア、イランの首都でありかつテヘラン州の州都。人口12,223,598人。都市圏人口は13,413,348人に達する。'
     tokenized_obj = mecab_wrapper.tokenize(sentence, return_list=False)
     assert isinstance(tokenized_obj, TokenizedSenetence)
     for token_obj in tokenized_obj.tokenized_objects:
         assert isinstance(token_obj, TokenizedResult)
-        if token_obj.word_stem == u'ペルシア語':
-            print(token_obj.word_stem)
+        if token_obj.word_stem == 'ペルシア語':
+            print((token_obj.word_stem))
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -225,9 +225,9 @@ def basic_example_3x():
     # Returned object is "TokenizedSenetence" class if you put return_list=False
     tokenized_obj = mecab_wrapper.tokenize(sentence=sentence, return_list=False)
     assert isinstance(tokenized_obj, TokenizedSenetence)
-    print('-'*30)
+    print(('-'*30))
     print('Mecab Demo')
-    print(tokenized_obj.convert_list_object())
+    print((tokenized_obj.convert_list_object()))
 
     # ========================================================
     # FILTERING
@@ -266,15 +266,15 @@ def basic_example_juman_3x():
         normalize=True,
         return_list=False)
     assert isinstance(tokenized_objects, TokenizedSenetence)
-    print('-'*30)
+    print(('-'*30))
     print('Juman Demo')
-    print(tokenized_objects.convert_list_object())
+    print((tokenized_objects.convert_list_object()))
     for token_object in tokenized_objects.tokenized_objects:
         assert isinstance(token_object, TokenizedResult)
-        print('word_stem:{}, word_surafce:{}, pos:{}'.format(
+        print(('word_stem:{}, word_surafce:{}, pos:{}'.format(
             token_object.word_stem,
             token_object.word_surface,
-            token_object.tuple_pos))
+            token_object.tuple_pos)))
 
     ### You can call juman with server mode. You must start JUMAN as server mode beforehand ###
     try:
@@ -304,15 +304,15 @@ def basic_example_jumanpp_3x():
         return_list=False
     )
     assert isinstance(tokenized_objects, TokenizedSenetence)
-    print('-' * 30)
+    print(('-' * 30))
     print('Juman++ Demo')
-    print(tokenized_objects.convert_list_object())
+    print((tokenized_objects.convert_list_object()))
     for token_object in tokenized_objects.tokenized_objects:
         assert isinstance(token_object, TokenizedResult)
-        print('word_stem:{}, word_surafce:{}, pos:{}'.format(
+        print(('word_stem:{}, word_surafce:{}, pos:{}'.format(
             token_object.word_stem,
             token_object.word_surface,
-            token_object.tuple_pos))
+            token_object.tuple_pos)))
 
     ### You can call juman with server mode. You must start JUMAN as server mode beforehand ###
     jumanpp_wrapper = JumanppWrapper(server='localhost', port=12000)
@@ -338,19 +338,19 @@ def basic_example_kytea_3x():
         normalize=True,
         return_list=False)
     assert isinstance(tokenized_objects, TokenizedSenetence)
-    print('-'*30)
+    print(('-'*30))
     print('Kytea Demo')
-    print(tokenized_objects.convert_list_object())
+    print((tokenized_objects.convert_list_object()))
     for token_object in tokenized_objects.tokenized_objects:
         assert isinstance(token_object, TokenizedResult)
         # kytea does not show word stem, thus word_stem attribute is always null string
         # instead kytea tells you inferred Yomi, pronounciation
-        print('word_surafce:{}, pos:{}, yomi:{}, yomi_score:{}'.format(
+        print(('word_surafce:{}, pos:{}, yomi:{}, yomi_score:{}'.format(
             token_object.word_surface,
             token_object.tuple_pos,
             token_object.misc_info['yomi'],
             token_object.misc_info['yomi_score'],
-        ))
+        )))
 
 
 def advanced_example_3x():
@@ -374,7 +374,7 @@ def advanced_example_3x():
     for token_obj in tokenized_obj.tokenized_objects:
         assert isinstance(token_obj, TokenizedResult)
         if token_obj.word_stem == 'ペルシア語':
-            print(token_obj.word_stem)
+            print((token_obj.word_stem))
 
 
 if __name__ == "__main__":

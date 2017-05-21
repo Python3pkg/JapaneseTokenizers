@@ -125,7 +125,7 @@ class MecabWrapper(WrapperBase):
         path_mecab_dict = self.__check_mecab_dict_path()
         path_mecab_libexe = self.__check_mecab_libexe()
 
-        cmCompileDict = u'{0}/mecab-dict-index -d {1}/ipadic -u {2} -f utf-8 -t utf-8 {3} > /dev/null'.format(path_mecab_libexe,
+        cmCompileDict = '{0}/mecab-dict-index -d {1}/ipadic -u {2} -f utf-8 -t utf-8 {3} > /dev/null'.format(path_mecab_libexe,
                                                                                                             path_mecab_dict,
                                                                                                             self._pathUserDictCsv.replace("csv", "dict"),
                                                                                                             self._pathUserDictCsv)
@@ -193,8 +193,8 @@ class MecabWrapper(WrapperBase):
         encoded_text = normalized_sentence.encode('utf-8')
 
         node = self.mecabObj.parseToNode(encoded_text)
-        node = node.next
-        while node.next is not None:
+        node = node.__next__
+        while node.__next__ is not None:
 
             word_surface = node.surface.decode('utf-8')
 
@@ -209,7 +209,7 @@ class MecabWrapper(WrapperBase):
                 is_surface=is_surface
             )
             tokenized_objects.append(tokenized_obj)
-            node = node.next
+            node = node.__next__
 
         tokenized_sentence = TokenizedSenetence(
             sentence=sentence,

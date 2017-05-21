@@ -9,7 +9,7 @@ class TestKyteaWrapperPython2(unittest.TestCase):
         pass
 
     def test_tokenization(self):
-        input_sentence = u"紗倉 まな（さくら まな、1993年3月23日 - ）は、日本のAV女優。"
+        input_sentence = "紗倉 まな（さくら まな、1993年3月23日 - ）は、日本のAV女優。"
         kytea_wrapper = KyteaWrapper()
         tokenized_result = kytea_wrapper.tokenize(
             sentence=input_sentence,
@@ -21,21 +21,21 @@ class TestKyteaWrapperPython2(unittest.TestCase):
         for t_obj in tokenized_result.tokenized_objects:
             assert isinstance(t_obj, TokenizedResult)
 
-        print('-'*30)
+        print(('-'*30))
         tokenized_result_list = tokenized_result.convert_list_object()
         assert isinstance(tokenized_result_list, list)
         for t_obj_tuple in tokenized_result_list:
             assert isinstance(t_obj_tuple, tuple)
-            print(u'word_surace: {}, word_pos_tuple: {}'.format(
+            print(('word_surace: {}, word_pos_tuple: {}'.format(
                 t_obj_tuple[0],
-                u', '.join(t_obj_tuple[1])
-            ))
+                ', '.join(t_obj_tuple[1])
+            )))
 
     def test_filter_pos(self):
         """
         """
-        print (u'Filtering Test. POS condition is only 名詞')
-        test_sentence = u"紗倉 まな（さくら まな、1993年3月23日 - ）は、日本のAV女優。"
+        print ('Filtering Test. POS condition is only 名詞')
+        test_sentence = "紗倉 まな（さくら まな、1993年3月23日 - ）は、日本のAV女優。"
         kytea_wrapper = KyteaWrapper()
         tokenized_result = kytea_wrapper.tokenize(
             sentence=test_sentence,
@@ -44,7 +44,7 @@ class TestKyteaWrapperPython2(unittest.TestCase):
             is_feature=True
         )
 
-        pos_condition = [(u'名詞', )]
+        pos_condition = [('名詞', )]
         filtered_result = kytea_wrapper.filter(
             parsed_sentence=tokenized_result,
             pos_condition=pos_condition
@@ -53,34 +53,34 @@ class TestKyteaWrapperPython2(unittest.TestCase):
         assert isinstance(filtered_result, FilteredObject)
         for t_obj in filtered_result.tokenized_objects:
             assert isinstance(t_obj, TokenizedResult)
-            print(u"word_surafce:{}, word_stem:{}, pos_tuple:{}, misc_info:{}".format(
+            print(("word_surafce:{}, word_stem:{}, pos_tuple:{}, misc_info:{}".format(
                 t_obj.word_surface,
                 t_obj.word_stem,
                 ' '.join(t_obj.tuple_pos),
                 t_obj.misc_info
-            ))
-            assert isinstance(t_obj.word_surface, unicode)
-            assert isinstance(t_obj.word_stem, unicode)
+            )))
+            assert isinstance(t_obj.word_surface, str)
+            assert isinstance(t_obj.word_stem, str)
             assert isinstance(t_obj.tuple_pos, tuple)
             assert isinstance(t_obj.misc_info, dict)
 
-            assert t_obj.tuple_pos[0] == u'名詞'
+            assert t_obj.tuple_pos[0] == '名詞'
 
-        print('-'*30)
+        print(('-'*30))
         for stem_posTuple in filtered_result.convert_list_object():
             assert isinstance(stem_posTuple, tuple)
             word_stem = stem_posTuple[0]
             word_posTuple = stem_posTuple[1]
-            assert isinstance(word_stem, unicode)
+            assert isinstance(word_stem, str)
             assert isinstance(word_posTuple, tuple)
 
-            print(u'word_stem:{} word_pos:{}'.format(word_stem, ' '.join(word_posTuple)))
+            print(('word_stem:{} word_pos:{}'.format(word_stem, ' '.join(word_posTuple))))
 
 
     def test_stopwords(self):
-        stopword = [u'ＡＶ', u'女優']
-        print (u'Stopwords Filtering Test. Stopwords is {}'.format(u','.join(stopword)))
-        test_sentence = u"紗倉 まな（さくら まな、1993年3月23日 - ）は、日本のAV女優。"
+        stopword = ['ＡＶ', '女優']
+        print(('Stopwords Filtering Test. Stopwords is {}'.format(','.join(stopword))))
+        test_sentence = "紗倉 まな（さくら まな、1993年3月23日 - ）は、日本のAV女優。"
         kytea_wrapper = KyteaWrapper()
         token_objects = kytea_wrapper.tokenize(sentence=test_sentence,
                                                return_list=False,
@@ -92,15 +92,15 @@ class TestKyteaWrapperPython2(unittest.TestCase):
         )
 
         check_flag = True
-        print('-'*30)
+        print(('-'*30))
         for stem_posTuple in filtered_result.convert_list_object():
             assert isinstance(stem_posTuple, tuple)
             word_stem = stem_posTuple[0]
             word_posTuple = stem_posTuple[1]
-            assert isinstance(word_stem, unicode)
+            assert isinstance(word_stem, str)
             assert isinstance(word_posTuple, tuple)
 
-            print(u'word_stem:{} word_pos:{}'.format(word_stem, ' '.join(word_posTuple)))
+            print(('word_stem:{} word_pos:{}'.format(word_stem, ' '.join(word_posTuple))))
             if word_stem in stopword: check_flag = False
         assert check_flag
 

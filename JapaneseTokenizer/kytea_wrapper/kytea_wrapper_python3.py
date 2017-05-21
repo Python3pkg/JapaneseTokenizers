@@ -19,7 +19,7 @@ __author__ = 'kensuke-mi'
 
 class KyteaWrapper(WrapperBase):
     def __init__(self, option_string=''):
-        assert isinstance(option_string, (str, str))
+        assert isinstance(option_string, str)
         # option string is argument of Kytea.
         self.kytea = Mykytea.Mykytea(option_string)
 

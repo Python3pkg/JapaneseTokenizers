@@ -9,9 +9,9 @@ __author__ = 'kensuke-mi'
 
 class TestFilter(unittest.TestCase):
     def setUp(self):
-        self.test_senetence = u'紗倉 まな（さくらまな、1993年3月23日 - ）は、日本のAV女優。'
-        self.stopword = [u'AV']
-        self.pos_condition = [(u'名詞', u'固有名詞'), (u'形容詞', u'自立', ),]
+        self.test_senetence = '紗倉 まな（さくらまな、1993年3月23日 - ）は、日本のAV女優。'
+        self.stopword = ['AV']
+        self.pos_condition = [('名詞', '固有名詞'), ('形容詞', '自立', ),]
         self.path_user_dict = os.path.join(os.path.dirname(__file__), 'resources/test/userdict.csv')
 
     def test_filtering(self):
@@ -33,8 +33,8 @@ class TestFilter(unittest.TestCase):
         )
         assert isinstance(filtered_obj, FilteredObject)
 
-        except_pos = set([u'動詞'])
-        match_pos_1 = set([u'名詞'])
+        except_pos = set(['動詞'])
+        match_pos_1 = set(['名詞'])
 
         check_flag = False
 

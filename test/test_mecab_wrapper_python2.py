@@ -10,7 +10,7 @@ python_version = sys.version_info
 
 class TestMecabWrapperPython2(unittest.TestCase):
     def setUp(self):
-        self.test_senetence = u'紗倉 まな（さくらまな、1993年3月23日 - ）は、日本のAV女優。'
+        self.test_senetence = '紗倉 まな（さくらまな、1993年3月23日 - ）は、日本のAV女優。'
         self.path_user_dict = os.path.join(os.path.dirname(__file__), 'resources/test/userdict.csv')
 
 
@@ -30,7 +30,7 @@ class TestMecabWrapperPython2(unittest.TestCase):
             for morph in parsed_obj: assert isinstance(morph, str)
             print(parsed_obj)
         else:
-            for morph in parsed_obj: assert isinstance(morph, unicode)
+            for morph in parsed_obj: assert isinstance(morph, str)
 
 
     def test_init_userdict(self):
@@ -41,7 +41,7 @@ class TestMecabWrapperPython2(unittest.TestCase):
 
         res = mecab_obj.tokenize(sentence=self.test_senetence, return_list=True)
         assert isinstance(res, list)
-        assert u'さくらまな' in res
+        assert 'さくらまな' in res
 
 
 if __name__ == '__main__':

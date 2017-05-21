@@ -19,7 +19,7 @@ class TestJumanppWrapperPython2(unittest.TestCase):
         if not os.path.exists(self.path_to_juman_command): self.path_to_juman_command = 'juman'
 
     def test_JumanppClient(self):
-        test_sentence = u'外国人参政権を欲しい。'
+        test_sentence = '外国人参政権を欲しい。'
         client_obj = JumanppClient(hostname='localhost', port=12000)
         res = client_obj.query(sentence=test_sentence, pattern=r'EOS')
 
@@ -27,7 +27,7 @@ class TestJumanppWrapperPython2(unittest.TestCase):
 
     def test_jumanpp_servermode(self):
         ### test with list return object ###
-        test_sentence = u'外国人参政権を欲しい。'
+        test_sentence = '外国人参政権を欲しい。'
         jumanpp_tokenizer = JumanppWrapper(server='localhost', port=12000)
         list_tokens = jumanpp_tokenizer.tokenize(sentence=test_sentence, return_list=True)
         assert isinstance(list_tokens, list)
@@ -44,17 +44,17 @@ class TestJumanppWrapperPython2(unittest.TestCase):
 
     def test_jumanpp_servermode_stress(self):
         ### test with severmode with much stress ###
-        test_sentence = u'外国人参政権を欲しい。'
+        test_sentence = '外国人参政権を欲しい。'
         jumanpp_tokenizer = JumanppWrapper(server='localhost', port=12000)
         for i in range(0, 1000):
             list_tokens = jumanpp_tokenizer.tokenize(sentence=test_sentence, return_list=True)
             assert isinstance(list_tokens, list)
-            assert u'外国' in test_sentence
+            assert '外国' in test_sentence
         del jumanpp_tokenizer
 
 
     def test_jumanpp_localmode(self):
-        test_sentence = u'外国人参政権を欲しい。'
+        test_sentence = '外国人参政権を欲しい。'
         jumanpp_tokenizer = JumanppWrapper()
         list_tokens = jumanpp_tokenizer.tokenize(sentence=test_sentence, return_list=True)
         assert isinstance(list_tokens, list)
